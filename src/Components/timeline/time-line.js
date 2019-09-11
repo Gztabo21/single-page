@@ -1,75 +1,52 @@
 import React ,{Component}from 'react';
-import Timeline,{ TimelineHeaders, SidebarHeader, DateHeader }  from 'react-calendar-timeline'
+import Timeline  from 'react-calendar-timeline'
 // make sure you include the timeline stylesheet or the timeline will not be styled
 import 'react-calendar-timeline/lib/Timeline.css'
-import generateFakeData from "./generate-fake-data";
+
 import moment from 'moment'
 
-var keys = {
-    groupIdKey: "id",
-    groupTitleKey: "title",
-    groupRightTitleKey: "rightTitle",
-    itemIdKey: "id",
-    itemTitleKey: "title",
-    itemDivTitleKey: "title",
-    itemGroupKey: "group",
-    itemTimeStartKey: "start",
-    itemTimeEndKey: "end",
-    groupLabelKey: "title"
-  };
- 
+
+
 class TimeLine extends Component{
     
-    constructor(props) {
-        super(props);
-    
-        const { groups, items } = generateFakeData();
-        const defaultTimeStart = moment()
-          .startOf("day")
-          .toDate();
-        const defaultTimeEnd = moment()
-          .startOf("day")
-          .add(1, "day")
-          .toDate();
-    
-        this.state = {
-          groups,
-          items,
-          defaultTimeStart,
-          defaultTimeEnd
-        };
-      }
+  
     render(){
-        const { groups, items, defaultTimeStart, defaultTimeEnd } = this.state;
+        const groups = [{ id: 1, title: 'group 1' }, { id: 2, title: 'group 2' }]
+
+        const items = [
+          {
+            id: 1,
+            group: 1,
+            title: 'item 1',
+            start_time: moment(),
+            end_time: moment().add(1, 'hour')
+          },
+          {
+            id: 2,
+            group: 2,
+            title: 'item 2',
+            start_time: moment().add(-0.5, 'hour'),
+            end_time: moment().add(0.5, 'hour')
+          },
+          {
+            id: 3,
+            group: 1,
+            title: 'item 3',
+            start_time: moment().add(2, 'hour'),
+            end_time: moment().add(3, 'hour')
+          }
+        ]
 
         return (
-          <Timeline
-            groups={groups}
-            items={items}
-            keys={keys}
-            rightSidebarWidth={150}
-            rightSidebarContent={<div>Above The Right</div>}
-            sidebarContent={<div>Above The Left</div>}
-            itemsSorted
-            itemTouchSendsClick={false}
-            stackItems
-            itemHeightRatio={0.75}
-            showCursorLine
-            canMove={false}
-            canResize={false}
-            defaultTimeStart={defaultTimeStart}
-            defaultTimeEnd={defaultTimeEnd}
-          >
-            <TimelineHeaders>
-              <SidebarHeader>
-                {({ getRootProps }) => {
-                  return <div {...getRootProps()}>Above The Left</div>;
-                }}
-              </SidebarHeader>
-              <DateHeader unit="primaryUnit" />
-              <DateHeader />
-            </TimelineHeaders>
-          </Timeline>
+            <div>
+            Rendered by react!
+            <Timeline
+              groups={groups}
+              items={items}
+              defaultTimeStart={moment().add(-12, 'hour')}
+              defaultTimeEnd={moment().add(12, 'hour')}
+            />
+          </div>
         );
       }
     }
