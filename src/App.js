@@ -9,6 +9,9 @@ import Home from './Components/home/home';
 import About from './Components/about/about';
 import PageError from './Components/pageError/pageError';
 import Service from './Components/services/service';
+import Footer from './Components/footer/footer';
+import Contact from './Components/contact/contact';
+
 
 function App() {
  
@@ -26,14 +29,21 @@ function App() {
               component={Home} />
             <Route
               exact
-              path="/page1"
+              path="/about"
               render={() => <About  />} />
             <Route
               exact
-              path="/page2"
+              path="/service"
               render={() => <Service name="Services" />} />
+              <Route
+              exact
+              path="/contact"
+              
+              render={() => <Contact />} />
             <Route component={PageError} />
-          </Switch></div>
+          </Switch>
+          <Footer/>
+          </div>
         </BrowserRouter>
 
     // <div className="App">

@@ -11,6 +11,7 @@ class Service extends Component {
     return (
       <div className="page">
         <p>Hola {this.props.name} desde página 1</p>
+        
       </div>
     );
   }
